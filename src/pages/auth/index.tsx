@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { useAuth } from "@/hooks/useAuth.tsx";
 import { setAuthorizationTokenToTheRequestHeaders } from "@/configs/axios.tsx";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
 
 export default function Auth() {
   const { login } = useAuth();
@@ -21,7 +23,10 @@ export default function Auth() {
     });
   };
 
-  const handelLogin = async (): Promise<void> => {
+  const handelLogin = async (
+    event: React.FormEvent<HTMLInputElement>
+  ): Promise<void> => {
+    event.preventDefault();
     const { username, password } = formData;
     const { token } = await login(username, password);
     setTokenValue(token);
@@ -37,56 +42,26 @@ export default function Auth() {
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6">
+          <Input
+            label="Username"
+            id="username"
+            inputChangedEvent={handleInputChanges}
+          ></Input>
+          <Input
+            label="Password"
+            id="password"
+            type="password"
+            inputChangedEvent={handleInputChanges}
+          ></Input>
           <div>
-            <div className="flex items-center justify-center">
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Username
-              </label>
-            </div>
-            <div className="mt-2">
-              <input
-                id="username"
-                name="username"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handleInputChanges}
-              />
-            </div>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-center">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={handleInputChanges}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
+            <Button
+              variant="outline"
+              color="primary"
               type="button"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={handelLogin}
             >
               Sign in
-            </button>
+            </Button>
           </div>
         </form>
       </div>

@@ -6,7 +6,7 @@ const apiPath = "/auth";
 export function useAuth() {
   const login = async (
     username: string,
-    password: string,
+    password: string
   ): Promise<ILoginResponse> => {
     const loginPath = "/login";
 
@@ -15,7 +15,7 @@ export function useAuth() {
       const { data } = await axios.post<ILoginResponse>(
         apiPath + loginPath,
         { username, password },
-        { headers: { "Content-Type": "application/json" } },
+        { headers: { "Content-Type": "application/json" } }
       );
 
       const { token } = data;

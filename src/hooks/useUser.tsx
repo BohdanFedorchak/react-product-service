@@ -6,6 +6,7 @@ import { useLocalStorage } from "usehooks-ts";
 
 export function useUser() {
   const [token] = useLocalStorage("token", "");
+
   if (token) {
     setAuthorizationTokenToTheRequestHeaders(token);
   }

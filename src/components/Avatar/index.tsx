@@ -3,6 +3,7 @@ import { IAdditionalClassesList } from "@/interfaces/commonProps.ts";
 interface IAvatarProps {
   avatarUrl?: string;
   className?: IAllowedClass;
+  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 type IAllowedClass = "ml-2.5";
@@ -12,10 +13,16 @@ const classesList: IAdditionalClassesList = {
 };
 
 import DefaultAvatar from "@/assets/images/default-avatar.svg";
-export default function Avatar({ avatarUrl, className }: IAvatarProps) {
+import { MouseEventHandler } from "react";
+export default function Avatar({
+  avatarUrl,
+  className,
+  onClick,
+}: IAvatarProps) {
   return (
     <div
       className={`w-8 h-8 rounded-full overflow-hidden ${className && classesList[className]}`}
+      onClick={onClick}
     >
       <img
         className="w-full h-full object-cover"
