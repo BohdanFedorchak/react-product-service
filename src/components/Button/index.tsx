@@ -15,7 +15,7 @@ export type ButtonProps = React.DetailedHTMLProps<
   IButtonOptions;
 
 type IButtonVariant = "outline" | "solid" | "ghost";
-type IButtonColorVariant = "primary" | "warning" | "success";
+type IButtonColorVariant = "primary" | "warning" | "success" | "black";
 
 const getVariant = (variant: IButtonVariant) => {
   switch (variant) {
@@ -36,6 +36,8 @@ const getColor = (colorType: IButtonColorVariant) => {
       return "bg-red-600 hover:bg-red-500";
     case "success":
       return "bg-green-500 hover:bg-green-400";
+    case "black":
+      return "bg-black";
     default:
       return "bg-white";
   }
